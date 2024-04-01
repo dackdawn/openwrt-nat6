@@ -43,7 +43,7 @@ boot() {
  
         logger -t NAT6 "Setting up NAT6"
  
-        WAN6_INTERFACE=$(uci get "network.$WAN6_NAME.ifname")
+        WAN6_INTERFACE=$(uci get "network.$WAN6_NAME.device" || uci get "network.$WAN6_NAME.ifname")
         if [ -z "$WAN6_INTERFACE" ] || [ ! -e "/sys/class/net/$WAN6_INTERFACE/" ] ; then
                 logger -t NAT6 "Fatal error: Lookup of $WAN6_NAME interface failed. Were the default interface names changed?" && exit 1
         fi
